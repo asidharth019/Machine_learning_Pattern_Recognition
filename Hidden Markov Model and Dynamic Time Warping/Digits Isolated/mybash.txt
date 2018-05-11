@@ -1,0 +1,9 @@
+
+./train_hmm 1.txt 143 3 32 .01
+./train_hmm o.txt 143 2 32 .01
+./train_hmm z.txt 143 4 32 .01
+
+
+./test_hmm test.txt 1.txt.hmm 
+./test_hmm test.txt o.txt.hmm 
+./test_hmm test.txt z.txt.hmm 
