@@ -1,0 +1,12 @@
+i=120
+for f in `ls testfile/*.txt`; do
+echo "$f";
+final="$i.txt"
+	for file in `ls tmp/*.txt`; do
+	    ./test_hmm $f $file
+	   # sed alphaout > line
+	    cat alphaout  >> $final
+	done
+i=$((i+1))
+done
+
