@@ -1,0 +1,237 @@
+\documentclass[12pt]{report}
+
+\usepackage[margin=0.7in,includefoot]{geometry}
+\usepackage{graphicx}
+\usepackage[hidelinks]{hyperref}
+\usepackage{float}
+\usepackage{mathtools}
+
+
+\begin{document}
+\begin{titlepage}
+  \begin{center}
+    \line(1,0){0}\\
+    [4cm]
+    \huge{\bfseries Pattern Recognition}\\
+    [0.5cm]
+    Assignment \#5\\
+    [0.5cm]
+    \LARGE{Non Parametric Methods} \\
+    [10cm]
+    \end{center}
+    \begin{center}
+      \large{Professor:\hfill Nirav Bhavsar (CS17S016)\\
+      Hema A. Murthy \hfill Sidharth Aggarwal (CS17S012)\\
+       }
+  \end{center}
+\end{titlepage}
+%Introduction of the Bayesian Classifier
+\setcounter{chapter}{1}
+\section {Non Parametric Methods}
+In this assignment we have dealt with the non parametric methods for classification of different types of data. The data which is used in the assignment are Image Data, Speech and Hand Written Data set. Further we have performed different methods which are as follows :-
+\begin{enumerate}
+ \item Bayesian classifier on Parzen Window Using Gaussian Kernel
+ \item Fisher Discriminant based Classifier
+\item Perceptron based Classifier
+ \item Support Vector Machine Based Classifier
+\item Multi-layer Feed-forward Neural Network based Classifier
+\end{enumerate}
+For the classifation we have used the Bayesian classifier in which we have taken the densities of the data to be gaussian:-
+\begin{displaymath}
+{\displaystyle f(x)={2\pi } ^{-{\frac{d}{2}}}\,\det{\Sigma}^{-{\frac {1}{2}}}
+\exp \left(-{1 \over 2}(x-\mu )^{\mathrm {T} }{\Sigma} ^{-1}(x-\mu )\right)}
+\end{displaymath}
+
+\section {Bayes classifier on Parzen window method using Gaussian kernel}
+For this we have applied the Parzen window using Gaussian kernel in which the volume is fixed with constant variance of h = 0.5 choosen by observing below graph, but the number of points coming within the volume changes. So as it the gaussian kernel so we have the partial points also in consideration. It is applied on the Image Data set. Further after getting the probabilities we have applied the bayesian classifier for classifying the whole image into one class by voting and by taking max average probability.
+
+
+%\clearpage
+%Linearly Separable Data
+
+
+% Add H graph
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=.12]{AccvsH.jpg}
+	\caption{Comparision of Accuracy Vs Variance of Gaussian Kernel}
+\end{figure}
+
+\begin{figure}[H]
+		\includegraphics[scale=.42]{Parzen1.jpg}
+		\includegraphics[scale=.42]{Parzen2.jpg}
+		\includegraphics[scale=.42]{Parzen3.jpg}
+	\caption{Confusion Matrix of of Parzen Window for h = 0.5}
+\end{figure}
+
+
+\begin{figure}[H]
+
+	\includegraphics[scale=.12]{ROC_ImageDataSet_H_05.jpg}
+	\includegraphics[scale=.12]{DET_Image_Parzen.jpg}
+	\caption{ROC \& DET  of Parzen Window for h = 0.5 }
+\end{figure}
+
+
+\noindent
+{\bfseries Observations :-}\\
+From the graph of Accuracy Vs Variance we observed that at h = 0.5 we are getting maximium accuray. Hence after choosing h = 0.5 we applied parzen window using gaussian kerneland we observed that we were getting 75$ \% $ accuray. And when we did variance normalized on whole data set we got 83.33$ \% $ accuray. And we were able to get 98.33$ \% $ when we did within class variance normalisition.
+
+
+\section{Fisher discriminant based classifier}
+Fisher discriminant is a technique which projects the point in the lower dimension taking in consideration that the data is linearly separable in the input space and by minimising within class scatter and maximising between class scatter. We worked on the Image Data set which have 3 classes so we can represent the data point in (c-1) 2 dimensional space. Then to classify points projected in the lower dimension we have applied the Bayesian clssifer.\\
+
+\noindent
+We have made the confusion matrix which tells the accuracy of the identification done for every Image class. The ROC plot tells the accuracy of the image classification by plotting the graph between TPR and FPR. DET graph tell the accuracy of the model by comparing the Miss \& False Alarm.
+
+
+\begin{figure}[H]
+		\includegraphics[scale=.12]{Scatter_IMG_Unnorm.jpg}
+		\includegraphics[scale=.12]{Scatter_IMG_Norm.jpg}
+		\includegraphics[scale=.12]{Scatter_IMG_Mean_Unorm.jpg}
+		\includegraphics[scale=.12]{Scatter_IMG_Mean_norm.jpg}
+	\caption{Scatter plot of Image Dataset and Image Means for Normalised and Raw dataset}
+\end{figure}
+
+
+\begin{figure}[H]
+		\includegraphics[scale=.45]{LDA1.jpg}
+		\includegraphics[scale=.45]{LDA2.jpg}
+		\includegraphics[scale=.45]{LDA3.jpg}
+	\caption{Confusion Matrix of LDA}
+\end{figure}
+
+
+
+\begin{figure}[H]
+	
+	\includegraphics[scale=.15]{ROC_ImageDataSet_LDA.jpg}
+	\includegraphics[scale=.15]{DET_ImageDataSet_LDA.jpg}
+	\caption{ROC \& DET  of LDA }
+\end{figure}
+
+
+\noindent
+{\bfseries Observations :-}\\
+By performing LDA we projected image data in 2 dimension and then performed Bayesian Classifier on those projected data and we were getting 75.8$ \% $ accuray. But when we did within class variance normalisation we were getting 100$ \% $ accuracy, which we can observe from the scatter plot also that the project image data set is linearly seperable.
+
+
+\section{Perceptron based classifier}
+Perceptron is the technique which gives us linear hyperplane in the input space keeping in consideration that all points need to be correctly classified. We have applied perceptron on the Image Data set. So, for this we have taken a random weight vector initially and keep changing the weight according to the missclassified points using gradient descent technique. \\
+
+\noindent
+We have made the confusion matrix which tells the accuracy of the identification done for every Image class. The ROC plot tells the accuracy of the image classification by plotting the graph between TPR and FPR. DET graph tell the accuracy of the model by comparing the Miss \& False Alarm.
+
+
+\begin{figure}[H]
+	\centering
+%	\includegraphics[scale=.46]{Per1.jpg}
+	\includegraphics[scale=.5]{Per2.jpg}
+	\includegraphics[scale=.48]{Per3.jpg}
+	\caption{Confusion Matrix of Perceptron based classifier}
+\end{figure}
+
+\begin{figure}[H]
+
+	\includegraphics[scale=.15]{ROC_ImageDataSet_Average.jpg}
+	\includegraphics[scale=.15]{DET_ImageDataSet_Average.jpg}
+	\caption{ROC \& DET  of Perceptron based classifier}
+\end{figure}
+
+\noindent
+{\bfseries Observations :-}\\
+Perceptron gives us a linear hyperplane, hence it will not be able to distinguish the variances between the class in image dataset and we were getting 44.5$ \% $ accuray. And whe we did variance normalized on whole data set we got 74$ \% $ accuray. But when we did within class variance normalisation we were getting 82.5$ \% $ accuracy.
+
+
+\section{Support vector machine based classifier}
+SVM  is technique of the maximising the margin between the classes with the help of the support vectors. So in this we have used the libsvm library to implement the SVM. In this we have used the linear kernel and gaussian kernel for decinding seperating plane. We have implemented the SVM on the Speech and Hand written Data set. In this we have converted all the sequence of speech and handwritten dataset to equal fixed length before applying to the SVM.\\
+
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[scale=.48]{Digit_SVM1.jpg}
+		\includegraphics[scale=.48]{Digit_SVM2.jpg}
+	\caption{Confusion Matrix of Speech Dataset for SVM}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=.105]{ROC_Speech_SVM.jpg}
+	\includegraphics[scale=.105]{DET_Speech_SVM.jpg}
+	\caption{ROC \& DET  of Speech Dataset for SVM}
+\end{figure}
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=.46]{HW_SVM1.jpg}
+	\includegraphics[scale=.46]{HW_SVM2.jpg}
+	\caption{Confusion Matrix of Handwritten Letters for SVM}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=.105]{ROC_HC_SVM.jpg}
+	\includegraphics[scale=.105]{DET_HW_SVM.jpg}
+	\caption{ROC \& DET  of Handwritten Letters for SVM}
+\end{figure}
+
+
+\noindent
+{\bfseries Observations :-}\\
+\begin{itemize}
+	\item For Speech Dataset,when we used linear kernel and then after taking maximum average probability we got 33$ \% $ accuracy as these speechs are not linearly seperable, but when we coverted each speech file into one vecter then we got 96$ \% $ accuracy. And when we used gaussian kernel we got 100$ \% $ accuracy as gaussian will be able to detect varainces between classes of speech.\\
+
+\item For Handwritten Character Dataset, we first did mean and variance normalisation and then extracted features and then we used linear kernel and then after taking maximum average probability we got 30$ \% $ accuracy as these characters are not linearly seperable, but when we coverted each character file into one vecter then we got 97.77$ \% $ accuracy. And when we used gaussian kernel we got 100$ \% $ accuracy as gaussian will be able to detect varainces between classes of handwritten character.
+\end{itemize}
+
+
+
+\section{Multi-layer feed-forward neural network based classifier}
+Feedforward neural network is a technique which works on the idea that if the machine makes mistake in the output(i.e.Error) then the error is corrected by backpropogating the error and adjusting the weight accordingly. It keeps on improving the model by correcting the error. In this we have taken 10 hidden layers. To implement the neural network we have the used the inbuilt function of matlab. We have applied the neural network on the Speech and Handwritten data set. In this we have converted all the sequence of speech and handwritten dataset to equal fixed length before applying to the NN.\\
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=.46]{NN_Speech1.jpg}
+	\includegraphics[scale=.46]{NN_Speech2.jpg}
+	\caption{Confusion Matrix of Speech Dataset for NN}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=.105]{ROC_Speech_NN.jpg}
+	\includegraphics[scale=.105]{DET_Speech_NN.jpg}
+	\caption{ROC \& DET  of Speech Dataset for NN}
+\end{figure}
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=.46]{NN_HW1.jpg}
+	\includegraphics[scale=.46]{NN_HW2.jpg}
+	\caption{Confusion Matrix of Handwritten Letters for NN}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=.105]{ROC_HW_NN.jpg}
+	\includegraphics[scale=.105]{DET_HW_NN.jpg}
+	\caption{ROC \& DET  of Handwritten Letters for NN}
+\end{figure}
+
+
+
+
+
+\noindent
+{\bfseries Observations :-}\\
+\begin{itemize}
+	\item For Speech Dataset,when we used 10 hidden layer neural network and then after taking maximum average probability we got 96$ \% $ accuracy, but when we coverted each speech file into one vecter then we got 100$ \% $ accuracy.\\
+
+\item For Handwritten Character Dataset, we first did mean and variance normalisation and then extracted features and then used 10 hidden layer neural network for training model, and then after taking maximum average probability we got 100$ \% $ accuracy, and when we converted each speech file into one vecter then we also got 100$ \% $ accuracy.\\
+\end{itemize}
+
+
+
+\end{document}
