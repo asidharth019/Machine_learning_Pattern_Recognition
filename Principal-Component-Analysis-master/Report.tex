@@ -1,0 +1,204 @@
+
+\documentclass[12pt]{report}
+
+\usepackage[margin=1in,includefoot]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath, amssymb}
+\usepackage[hidelinks]{hyperref}
+\usepackage{float}
+
+\begin{document}
+
+\begin{titlepage}
+	\begin{center}
+		\line(1,0){0}\\
+		[4cm]
+		\huge{\bfseries Linear Algebra \& Random Processes} \\
+		[0.5cm]
+		Programming Assignment \#1 \\
+		[10cm]
+	\end{center}
+	\begin{center}
+		
+			\Large{
+			  Professor:  \hfill  Nirav Bhavsar (CS17S016)\\
+		  L.A.Prashanth  \hfill  Sidharth Aggarwal (CS17S012)\\
+			}
+	
+	
+	\end{center}
+	
+\end{titlepage}
+
+
+\setcounter{page}{1}
+
+\setcounter{chapter}{1}
+
+\section*{\LARGE Question 1 on Projection Matrix}
+
+(A). Write programs to Find the projection matrix Pc onto the column space of matrix A.
+
+
+\[A = \begin{bmatrix}
+3&6&6\\
+4&8&8\\
+\end{bmatrix}\]
+
+\noindent
+Using below formula:\\
+$ c = [3; 4]; $\\
+$Pc =  c*inv(c'*c)*c' $\\ \\
+We get $ Pc $ as:
+\[Pc = \begin{bmatrix}
+0.3600   & 0.4800\\
+0.4800  &  0.6400\\
+\end{bmatrix}\]\\
+\noindent
+\\
+(B). Find the 3x3 projection matrix PR onto the row space of A. Multiply B = PCAPR. Your answer B should be a little surprising -- Can you explain it? \\
+
+\noindent
+Using below formula:\\
+$ r = [3; 6; 6];\\
+Pr =  r*inv(r'*r)*r'\\
+B = Pc*A*Pr\\ \\ $
+We get $ Pr $ and $ B $ as:
+
+\[Pr = \begin{bmatrix}
+    0.1111  &  0.2222  &  0.2222\\
+0.2222  &  0.4444  &  0.4444\\
+0.2222  &  0.4444  &  0.4444\\
+\end{bmatrix}\]
+\\
+\[B = \begin{bmatrix}
+3&6&6\\
+4&8&8\\
+\end{bmatrix}\]\\
+
+\noindent
+\textbf{Explanation:} \\
+We observe that for any vector x, Ax $\mathbf{\varepsilon}$ C(A), so $ Pc*A*x = Ax.$ So $Pc*A = A $. Similarly, for any vector x we can write it as $  x = n + r $ where x is in N(A) and r is in $ C(A^{T}) $. Then $ A*x= A*n + A*r = A*r $ by the definition of nullspace. But $ Pr*x = Pr*n + Pr*r = Pr*r $, as the nullspace is orthogonal to the row space, so projecting onto the row space kills the nullspace. So we have $ A*Pr = A $. Thus $ Pc*A*Pr = (Pc*A)*Pr = A*Pr = A $.
+\clearpage
+
+\section*{\LARGE Question 2 on Images and Eigen Space}
+
+(A). For each image, plot the intensity histogram. The intensity histogram of an image is a histogram that shows the number of pixels in an image at each different intensity value
+found in that image.
+
+\begin{figure}[H]
+	\includegraphics[scale=.1]{/Users/NiravMBA/Desktop/Report/LARPA1/Intensity_Histogram_Img_1.jpg}
+	\includegraphics[scale=.1]{/Users/NiravMBA/Desktop/Report/LARPA1/Intensity_Histogram_Img_2.jpg}
+	\includegraphics[scale=.1]{/Users/NiravMBA/Desktop/Report/LARPA1/Intensity_Histogram_Img_3.jpg}
+	\includegraphics[scale=.1]{/Users/NiravMBA/Desktop/Report/LARPA1/Intensity_Histogram_Img_4.jpg}
+	\includegraphics[scale=.1]{/Users/NiravMBA/Desktop/Report/LARPA1/Intensity_Histogram_Img_5.jpg}
+	\includegraphics[scale=.1]{/Users/NiravMBA/Desktop/Report/LARPA1/Intensity_Histogram_Img_6.jpg}
+
+\end{figure}
+
+
+\begin{figure}[H]
+	\includegraphics[scale=.1]{/Users/NiravMBA/Desktop/Report/LARPA1/Intensity_Histogram_Img_7.jpg}
+	\includegraphics[scale=.1]{/Users/NiravMBA/Desktop/Report/LARPA1/Intensity_Histogram_Img_8.jpg}
+	\includegraphics[scale=.1]{/Users/NiravMBA/Desktop/Report/LARPA1/Intensity_Histogram_Img_9.jpg}
+	\includegraphics[scale=.1]{/Users/NiravMBA/Desktop/Report/LARPA1/Intensity_Histogram_Img_10.jpg}
+	\caption{Intensity Histogram for all 10 Gray Scale Images}
+\end{figure}
+
+\noindent
+{\bfseries Observation: } 
+We observe that for gray scale images, the values range from 0 to 255, where 0 means completely black and 255 means it white. So from the intenstiy graph we can see that for each value from 0 to 255 how many time each value occures in a particular image. If the value is more near 0 then the image is dark, if it is more near 255 then the image is bright, but for normal face images, the images will have both light and dark region, hence we are getting about uneven distribution for different values.\\ \\
+
+\noindent
+(B). Convert the basis to images and plot the same. The basis are same as the set of eigen
+vectors given.\\
+
+
+
+
+\begin{figure}[H]
+
+	\includegraphics[scale=.19]{/Users/NiravMBA/Desktop/Report/LARPA1/Eigen_Faces_24.jpg}
+	\includegraphics[scale=.19]{/Users/NiravMBA/Desktop/Report/LARPA1/Eigen_Faces_Random24.jpg}
+	\caption{Images of first 16 \& few higher index Eigen Basis}
+\end{figure}
+
+\noindent
+{\bfseries Observation: } 
+We observe that first few images of eigen basis contains more information about the image, which tell us which direction are more important and which are less important. While after about 400 index eigen basis the image of eigen basis is almost black which means that those direction contains very few information used in representing image.\\ \\
+
+(C). For each image, project image onto the eigen space and find the top K (K$ < $8464)
+directions such that the relative error(frobenius norm) is $ < $ 1$ \% $ for reconstruction of image using these eigenvectors.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=.12]{/Users/NiravMBA/Desktop/Report/LARPA1/Frobenius_Norm_Plot_Image_1.jpg}
+	\includegraphics[scale=.135]{/Users/NiravMBA/Desktop/Report/LARPA1/Reconstructed_Image_1.jpg}
+	
+\end{figure}
+
+\begin{figure}[H]
+
+	\includegraphics[scale=.11]{/Users/NiravMBA/Desktop/Report/LARPA1/Frobenius_Norm_Plot_Image_2.jpg}
+	\includegraphics[scale=.11]{/Users/NiravMBA/Desktop/Report/LARPA1/Reconstructed_Image_2.jpg}
+	\includegraphics[scale=.11]{/Users/NiravMBA/Desktop/Report/LARPA1/Frobenius_Norm_Plot_Image_3.jpg}
+	\includegraphics[scale=.11]{/Users/NiravMBA/Desktop/Report/LARPA1/Reconstructed_Image_3.jpg}
+	\includegraphics[scale=.11]{/Users/NiravMBA/Desktop/Report/LARPA1/Frobenius_Norm_Plot_Image_4.jpg}
+	\includegraphics[scale=.11]{/Users/NiravMBA/Desktop/Report/LARPA1/Reconstructed_Image_4.jpg}
+	\caption{Frobenius Norm Plot \& Projection and Reconstructed Images with top K eigen vectors for Images 2, 3 \& 4 }
+	
+\end{figure}
+
+\begin{figure}[H]
+
+
+	\includegraphics[scale=.11]{/Users/NiravMBA/Desktop/Report/LARPA1/Frobenius_Norm_Plot_Image_5.jpg}
+	\includegraphics[scale=.11]{/Users/NiravMBA/Desktop/Report/LARPA1/Reconstructed_Image_5.jpg}
+	\includegraphics[scale=.11]{/Users/NiravMBA/Desktop/Report/LARPA1/Frobenius_Norm_Plot_Image_6.jpg}
+	\includegraphics[scale=.11]{/Users/NiravMBA/Desktop/Report/LARPA1/Reconstructed_Image_6.jpg}
+	\includegraphics[scale=.11]{/Users/NiravMBA/Desktop/Report/LARPA1/Frobenius_Norm_Plot_Image_7.jpg}
+	\includegraphics[scale=.11]{/Users/NiravMBA/Desktop/Report/LARPA1/Reconstructed_Image_7.jpg}
+	
+	\caption{Frobenius Norm Plot \& Projection and Reconstructed Images with top K eigen vectors for Images 5, 6 \& 7 }
+	
+\end{figure}
+
+\begin{figure}[H]
+	
+
+	\includegraphics[scale=.11]{/Users/NiravMBA/Desktop/Report/LARPA1/Frobenius_Norm_Plot_Image_8.jpg}
+	\includegraphics[scale=.11]{/Users/NiravMBA/Desktop/Report/LARPA1/Reconstructed_Image_8.jpg}
+	\includegraphics[scale=.11]{/Users/NiravMBA/Desktop/Report/LARPA1/Frobenius_Norm_Plot_Image_9.jpg}
+	\includegraphics[scale=.11]{/Users/NiravMBA/Desktop/Report/LARPA1/Reconstructed_Image_9.jpg}
+	\includegraphics[scale=.11]{/Users/NiravMBA/Desktop/Report/LARPA1/Frobenius_Norm_Plot_Image_10.jpg}
+	\includegraphics[scale=.11]{/Users/NiravMBA/Desktop/Report/LARPA1/Reconstructed_Image_10.jpg}
+	\caption{Frobenius Norm Plot \& Projection and Reconstructed Images with top K eigen vectors for Images 8, 9 \& 10 }
+	
+\end{figure}
+
+
+\clearpage
+{\bfseries Observation: } 
+We observe from Frobenius Norm plot that as we are increasing the selection of top k eigen basis, the relative frobenius norm difference for reconstructed image is also decreasing and from that plot we can observe that for most of the images, for top 90 eigen basis relative frobenius norm difference for reconstructed image is $ < 1\% $. By plotting reconstructed images for different values of k we can observe how top k eigen basis are contributing significant information in reconstruction of image.\\ \\
+
+
+
+
+
+\section*{\LARGE Extra experiment on my photo}
+
+\begin{figure}[H]
+
+	\includegraphics[scale=.11]{/Users/NiravMBA/Desktop/Report/LARPA1/Frobenius_Norm_Plot_Image_11.jpg}
+	\includegraphics[scale=.11]{/Users/NiravMBA/Desktop/Report/LARPA1/Reconstructed_Image_11.jpg}
+	\caption{Frobenius Norm Plot \& Projection and Reconstructed Images with top K eigen vectors for my photo }
+	
+\end{figure}
+
+{\bfseries Observation: } 
+We observe that since my photo was not used in construction of eigen basis, it takes around top 2000 eigen basis to reconstruct image with relative frobenius norm difference being $ < 1\% $. Frobenius norm plot also show that reconstruction error is very high for few top k eigen basis and it keeps on decreasing as we add more eigen basis providing more information about image in different directions.\\ \\
+
+
+
+\end{document}
+			
