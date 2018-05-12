@@ -2,7 +2,7 @@
 Machine Learning / Pattern Recognition algorithms implementations
 
 Algorithms implemented:
-1. Singular Value Decomposition, Eigen Value Decomposition on images
+1. Singular Value Decomposition, Eigen Value Decomposition on image dataset
 2. Polynomial Regression
 3. Bayesian Classiﬁer on real & synthetic data
 4. Fisher discriminant based classifier on features of images
