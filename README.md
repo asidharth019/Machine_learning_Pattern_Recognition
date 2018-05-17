@@ -1,5 +1,5 @@
 # Machine-Learning-Pattern-Recognition
-Machine Learning / Pattern Recognition algorithms implementations
+Machine Learning / Pattern Recognition algorithms implementation
 
 Algorithms implemented:
 1. Singular Value Decomposition, Eigen Value Decomposition on image dataset
